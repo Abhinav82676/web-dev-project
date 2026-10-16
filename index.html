@@ -1,301 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Personal portfolio of Abhinav Kumar, a Computer Science & AI student at Scaler School of Technology.">
-  <title>Abhinav Kumar | Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Abhinav Kumar, a first-year Computer Science &amp; AI student at Scaler School of Technology, Bengaluru. Learning Java, web development and data structures by building.">
+<meta name="theme-color" content="#13161C">
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
+<title>Abhinav Kumar | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1A73E8; --blue-d:#1765CC; --blue-bg:#E8F0FE;
+  --red:#EA4335; --yellow:#FBBC04; --green:#34A853;
+  --text:#202124; --mute:#5F6368; --line:#DADCE0; --surface:#F8F9FA; --white:#fff;
+  --card:#fff; --nav:rgba(255,255,255,.94); --badge-bg:#FEF7E0; --badge-c:#B06000; --on-blue:#fff;
+  --font:"Google Sans Flex","Google Sans","Product Sans",Roboto,"Segoe UI",system-ui,sans-serif;
+  --mono:"Roboto Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--white);color:var(--text);font:400 1rem/1.7 var(--font);overflow-x:hidden}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:8px}
+.container{width:min(1100px,100% - 48px);margin:0 auto}
+h1,h2,h3{margin:0;font-weight:500;letter-spacing:-0.01em;line-height:1.2}
+h2{font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:10px}
+.section{padding:88px 0}
+.section-alt{background:var(--surface)}
+.section-intro{color:var(--mute);font-size:1.1rem;margin:0 0 40px;max-width:60ch}
+
+/* navbar */
+.navbar{position:sticky;top:0;z-index:50;background:var(--nav);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0)}
+.navbar-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-size:1.25rem;font-weight:500}
+.dots{display:flex;gap:3px}
+.dots i{width:9px;height:9px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:var(--blue)}.dots i:nth-child(2){background:var(--red)}
+.dots i:nth-child(3){background:var(--yellow)}.dots i:nth-child(4){background:var(--green)}
+.nav-links{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.nav-links a{display:block;padding:8px 16px;border-radius:999px;text-decoration:none;color:var(--mute);font-weight:500;font-size:.95rem;transition:background .15s,color .15s}
+.nav-links a:hover{background:var(--surface);color:var(--text)}
+.nav-links a.active{background:var(--blue-bg);color:var(--blue-d)}
+.menu-button{display:none;background:none;border:0;font-size:1.5rem;color:var(--text);padding:6px 10px;cursor:pointer;border-radius:8px}
+@media(max-width:800px){
+  .menu-button{display:block}
+  .nav-links{position:absolute;left:0;right:0;top:68px;flex-direction:column;background:var(--white);border-bottom:1px solid var(--line);padding:8px 24px 16px;display:none;box-shadow:0 8px 16px rgba(60,64,67,.15)}
+  .nav-links.open{display:flex}
+}
+
+/* buttons */
+.button-group{display:flex;gap:12px;flex-wrap:wrap}
+.button{display:inline-block;padding:11px 26px;border-radius:999px;font-weight:500;text-decoration:none;border:1px solid transparent;cursor:pointer;font:500 .95rem var(--font);transition:background .15s,box-shadow .15s}
+.button-primary{background:var(--blue);color:var(--on-blue)}
+.button-primary:hover{background:var(--blue-d);box-shadow:0 1px 3px rgba(60,64,67,.4)}
+.button-outline{background:var(--card);color:var(--blue);border-color:var(--line)}
+.button-outline:hover{background:var(--blue-bg);border-color:var(--blue-bg)}
+.button-small{padding:8px 20px;font-size:.9rem}
+
+/* hero */
+.hero{padding:80px 0 96px}
+.hero-inner{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center}
+.hero-hello{display:inline-block;background:var(--blue-bg);color:var(--blue-d);font-weight:500;font-size:.95rem;padding:6px 16px;border-radius:999px;margin-bottom:22px}
+.hero h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:500;line-height:1.05;letter-spacing:-0.03em}
+.hero-subtitle{font-size:1.5rem;color:var(--mute);margin:20px 0 16px}
+.hero-description{color:var(--mute);font-size:1.1rem;max-width:52ch;margin:0 0 32px}
+.glance{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:32px;box-shadow:0 1px 3px rgba(60,64,67,.15),0 4px 12px rgba(60,64,67,.08)}
+.glance h3{font-size:1.1rem;margin-bottom:6px}
+.glance .sub{color:var(--mute);margin:0 0 22px;font-size:.95rem}
+.glance dl{margin:0}
+.glance dt{font-size:.85rem;color:var(--mute);margin-top:16px}
+.glance dd{margin:2px 0 0;font-weight:500}
+.bar{display:flex;height:6px;border-radius:3px;overflow:hidden;margin-bottom:22px}
+.bar i{flex:1}
+.bar i:nth-child(1){background:var(--blue)}.bar i:nth-child(2){background:var(--red)}
+.bar i:nth-child(3){background:var(--yellow)}.bar i:nth-child(4){background:var(--green)}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:40px}.section{padding:64px 0}}
+
+/* cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px}
+.card h3{font-size:1.15rem;margin-bottom:14px}
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:start}
+.about-text p{margin:0 0 16px;color:var(--mute);font-size:1.05rem;max-width:62ch}
+.small-heading{font-size:1.05rem;margin:28px 0 12px}
+.pill-list{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.pill-list li{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:5px 14px;font-size:.92rem;font-weight:500}
+.section-alt .pill-list li{background:var(--card)}
+.focus-list{margin:0;padding:0;list-style:none}
+.focus-list li{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.focus-list li:last-child{border:0}
+.focus-list li::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--blue)}
+.focus-list li:nth-child(2)::before{background:var(--red)}
+.focus-list li:nth-child(3)::before{background:var(--yellow)}
+.focus-list li:nth-child(4)::before{background:var(--green)}
+@media(max-width:800px){.about-grid{grid-template-columns:1fr}}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.skills-card{border-top:4px solid var(--blue)}
+.skills-grid .skills-card:nth-child(2){border-top-color:var(--red)}
+.skills-grid .skills-card:nth-child(3){border-top-color:var(--yellow)}
+.skills-grid .skills-card:nth-child(4){border-top-color:var(--green)}
+.skills-card.learning .pill-list li{border-style:dashed;color:var(--mute)}
+
+/* projects */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.project-card{display:flex;flex-direction:column;gap:12px;transition:box-shadow .2s,transform .2s}
+.project-card:hover{box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 8px 3px rgba(60,64,67,.15);transform:translateY(-2px)}
+.project-card p{margin:0;color:var(--mute)}
+.project-card .button-group{margin-top:auto;padding-top:10px}
+.technologies{font:500 .85rem var(--mono);color:var(--blue)!important}
+.soon{background:var(--surface);border-style:dashed}
+.soon:hover{box-shadow:none;transform:none}
+.badge{align-self:flex-start;background:var(--badge-bg);color:var(--badge-c);font-weight:500;font-size:.8rem;padding:3px 12px;border-radius:999px}
+
+/* education + timeline */
+.edu-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:32px;align-items:start}
+.education-field{color:var(--blue);font-weight:500;margin:0 0 6px}
+.education-meta{color:var(--mute);margin:0}
+.timeline{list-style:none;margin:0;padding:0 0 0 28px;border-left:2px solid var(--line)}
+.timeline-item{position:relative;padding:0 0 24px 18px}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-item::before{content:"";position:absolute;left:-37px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--white);border:3px solid var(--blue)}
+.timeline-item:nth-child(2)::before{border-color:var(--red)}
+.timeline-item:nth-child(3)::before{border-color:var(--yellow)}
+.timeline-item:nth-child(4)::before{border-color:var(--green)}
+.timeline-item:nth-child(5)::before{border-color:var(--blue)}
+@media(max-width:800px){.edu-grid{grid-template-columns:1fr}}
+
+/* contact */
+.contact-box{background:var(--blue-bg);border-radius:28px;padding:clamp(32px,6vw,64px);text-align:center}
+.contact-box h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:14px}
+.contact-box p{color:var(--mute);max-width:50ch;margin:0 auto 24px;font-size:1.1rem}
+.contact-value{font:500 1.05rem var(--mono);color:var(--text)!important;margin-bottom:26px!important}
+.contact-box .button-group{justify-content:center}
+.contact-box .button-outline{border-color:transparent}
+.copied{display:block;min-height:1.6em;margin-top:14px;color:var(--green);font-weight:500}
+
+/* footer */
+.footer{border-top:1px solid var(--line);background:var(--surface);padding:32px 0 calc(32px + env(safe-area-inset-bottom,0))}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.footer p{margin:0;color:var(--mute);font-size:.95rem}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:var(--mute);text-decoration:none;font-size:.95rem}
+.footer-links a:hover{color:var(--blue)}
+.back-to-top{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0));width:48px;height:48px;border-radius:16px;border:0;background:var(--blue);color:var(--on-blue);font-size:1.2rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s;box-shadow:0 2px 6px rgba(60,64,67,.4)}
+.back-to-top.show{opacity:1;pointer-events:auto}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+.nav-right{display:flex;align-items:center;gap:6px}
+.theme-toggle{background:none;border:1px solid var(--line);color:var(--text);width:40px;height:40px;border-radius:50%;font-size:1.1rem;cursor:pointer;line-height:1;transition:background .15s}
+.theme-toggle:hover{background:var(--surface)}
+html[data-theme="dark"]{color-scheme:dark;
+  --blue:#8AB4F8; --blue-d:#AECBFA; --blue-bg:#1C2A44;
+  --red:#F28B82; --yellow:#FDD663; --green:#81C995;
+  --text:#E8EAED; --mute:#9AA0A6; --line:#3C4043; --surface:#1B1E26; --white:#13161C;
+  --card:#1F232C; --nav:rgba(19,22,28,.92); --badge-bg:#3B3217; --badge-c:#FDD663; --on-blue:#13161C}
+html[data-theme="dark"] .card,html[data-theme="dark"] .glance{box-shadow:none}
+html[data-theme="dark"] .project-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.5)}
+html[data-theme="dark"] .contact-box .button-outline{background:var(--card)}
+@media(max-width:800px){html[data-theme="dark"] .nav-links{box-shadow:0 8px 16px rgba(0,0,0,.5)}}
+</style>
 </head>
 <body>
-
-  <!-- ========== NAVBAR ========== -->
-  <header class="navbar">
-    <div class="container navbar-inner">
-      <a href="#home" class="logo">Abhinav Kumar</a>
-
-      <button class="menu-button" id="menu-button" aria-label="Open menu" aria-expanded="false">
-        &#9776;
-      </button>
-
-      <nav>
-        <ul class="nav-links" id="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+<header class="navbar">
+  <div class="container navbar-inner">
+    <a href="#home" class="logo"><span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Abhinav Kumar</a>
+    <div class="nav-right">
+    <nav aria-label="Main">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme"></button>
+    <button class="menu-button" id="menu-button" aria-label="Open menu" aria-expanded="false">&#9776;</button>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main>
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <span class="hero-hello">Abhinav ka Anubhav</span>
+        <h1>I'm Abhinav Kumar.</h1>
+        <p class="hero-subtitle">Computer Science &amp; AI student</p>
+        <p class="hero-description">The control rooms behind cricket matches got me curious about code. Now I'm a first-year student at Scaler School of Technology in Bengaluru, learning Java, web development and data structures by building small projects.</p>
+        <div class="button-group">
+          <a href="#projects" class="button button-primary">View projects</a>
+          <a href="#contact" class="button button-outline">Contact me</a>
+        </div>
+      </div>
+      <aside class="glance" aria-label="At a glance">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <h3>At a glance</h3>
+        <p class="sub">Student developer, Bengaluru</p>
+        <dl>
+          <dt>Studying</dt><dd>Computer Science &amp; AI, Scaler School of Technology</dd>
+          <dt>Working with</dt><dd>Java, HTML, CSS</dd>
+          <dt>Learning</dt><dd>Data Structures &amp; Algorithms, AI/ML, Git</dd>
+          <dt>Building</dt><dd>Library Management System in Java</dd>
+          <dt>Aiming for</dt><dd>Higher studies in Computer Science</dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
 
-    <!-- ========== HERO ========== -->
-    <section class="hero" id="home">
-      <div class="container hero-inner">
+  <section class="section section-alt" id="about">
+    <div class="container">
+      <h2>About me</h2>
+      <p class="section-intro">Where my interest in code started, and what keeps me curious.</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>My interest in computers started with cricket. During a DRS review, I kept wondering about the control room behind the scenes: a whole room of screens, replay feeds and equipment working together so that one decision can be made in seconds. I wanted to know how all that technology fits together, and that question led me to programming.</p>
+          <p>I'm now studying Computer Science &amp; AI at Scaler School of Technology in Bengaluru. I'm learning Java and data structures, and I build small projects so that I understand a concept before I move on to the next one.</p>
+          <p>I'm also curious about how large edtech companies run: how they build products, teach thousands of learners at once and manage as businesses. Outside code, I play cricket and enjoy thinking about how teams are managed. My goal is to go for higher studies in Computer Science.</p>
+          <h3 class="small-heading">Interests</h3>
+          <ul class="pill-list">
+            <li>Computer Science</li><li>Artificial Intelligence</li><li>Problem solving</li>
+            <li>Web development</li><li>How edtech companies work</li><li>Cricket</li><li>Management</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Currently focused on</h3>
+          <ul class="focus-list">
+            <li>Data Structures &amp; Algorithms</li>
+            <li>Java</li>
+            <li>Web development</li>
+            <li>Getting started with competitive programming</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="hero-text">
-          <h1>Hi, I'm Abhinav Kumar.</h1>
-          <p class="hero-subtitle">Computer Science &amp; AI Student</p>
-          <p class="hero-description">
-            I'm a first-year Computer Science student who enjoys learning by building things.
-            I'm currently exploring programming, web development, AI and problem solving.
-          </p>
+  <section class="section" id="skills">
+    <div class="container">
+      <h2>Skills</h2>
+      <p class="section-intro">What I can do today, and what I'm learning next.</p>
+      <div class="skills-grid">
+        <div class="card skills-card"><h3>Programming</h3><ul class="pill-list"><li>Java</li><li>Problem solving</li></ul></div>
+        <div class="card skills-card"><h3>Web</h3><ul class="pill-list"><li>HTML</li><li>Semantic HTML</li><li>CSS</li><li>Flexbox &amp; CSS Grid</li><li>Responsive layouts</li></ul></div>
+        <div class="card skills-card"><h3>Tools</h3><ul class="pill-list"><li>GitHub</li><li>GitHub Pages</li><li>VS Code</li><li>Markdown</li></ul></div>
+        <div class="card skills-card learning"><h3>Learning</h3><ul class="pill-list"><li>Data Structures &amp; Algorithms</li><li>Object-oriented programming</li><li>AI/ML</li><li>Git</li><li>JavaScript</li><li>Python</li><li>C++</li><li>Competitive programming</li></ul></div>
+      </div>
+    </div>
+  </section>
 
+  <section class="section section-alt" id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <p class="section-intro">I build small projects to practice what I learn.</p>
+      <div class="projects-grid">
+        <article class="card project-card">
+          <h3>Personal Portfolio</h3>
+          <p>The site you're on. I built it to practice semantic HTML, CSS layouts and responsive design for phones and laptops.</p>
+          <p class="technologies">HTML &bull; CSS &bull; JavaScript</p>
           <div class="button-group">
-            <a href="#projects" class="button button-primary">View Projects</a>
-            <a href="#contact" class="button button-outline">Contact Me</a>
+            <a href="https://abhinav82676.github.io/web-dev-project/" class="button button-primary button-small">Live demo</a>
+            <a href="https://github.com/Abhinav82676/web-dev-project" class="button button-outline button-small">GitHub</a>
           </div>
-        </div>
-
-        <div class="terminal">
-          <div class="terminal-top">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
-          </div>
-          <div class="terminal-body">
-            <p class="command">$ whoami</p>
-            <p class="output">Abhinav Kumar</p>
-
-            <p class="command">$ currently_learning</p>
-            <p class="output">CS + AI</p>
-
-            <p class="command">$ languages</p>
-            <p class="output">C++ Java Python JavaScript</p>
-          </div>
-        </div>
-
+        </article>
+        <article class="card project-card soon">
+          <span class="badge">In progress</span>
+          <h3>Library Management System</h3>
+          <p>A Java console application to practice object-oriented programming: adding books, registering members, and issuing and returning books.</p>
+          <p class="technologies">Java</p>
+        </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ========== ABOUT ========== -->
-    <section class="section" id="about">
-      <div class="container">
-        <h2>About Me</h2>
-
-        <div class="about-grid">
-          <div class="about-text">
-            <p>
-              I'm studying Computer Science &amp; AI at Scaler School of Technology in Bengaluru.
-              Right now I'm building my programming fundamentals and trying to learn by making
-              small projects instead of only reading about things.
-            </p>
-            <p>
-              I like solving problems, writing code and figuring out how things work. This portfolio
-              is one of my first web development projects.
-            </p>
-
-            <h3 class="small-heading">Interests</h3>
-            <ul class="pill-list">
-              <li>Computer Science</li>
-              <li>Artificial Intelligence</li>
-              <li>Problem Solving</li>
-              <li>Web Development</li>
-              <li>Programming</li>
-              <li>Competitive Programming</li>
-              <li>Building useful projects</li>
-            </ul>
-          </div>
-
-          <div class="card focus-card">
-            <h3>Currently focused on</h3>
-            <ul class="focus-list">
-              <li>Programming Fundamentals</li>
-              <li>Data Structures &amp; Algorithms</li>
-              <li>Web Development</li>
-              <li>AI/ML Fundamentals</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== SKILLS ========== -->
-    <section class="section section-alt" id="skills">
-      <div class="container">
-        <h2>Skills</h2>
-
-        <div class="skills-grid">
-          <div class="card">
-            <h3>Programming</h3>
-            <ul class="pill-list">
-              <li>C++</li>
-              <li>Java</li>
-              <li>Python</li>
-              <li>JavaScript</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Web</h3>
-            <ul class="pill-list">
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>JavaScript</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Tools</h3>
-            <ul class="pill-list">
-              <li>Git</li>
-              <li>GitHub</li>
-              <li>VS Code</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Learning</h3>
-            <ul class="pill-list">
-              <li>Data Structures &amp; Algorithms</li>
-              <li>AI/ML</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== PROJECTS ========== -->
-    <section class="section" id="projects">
-      <div class="container">
-        <h2>Projects</h2>
-        <p class="section-intro">Student projects I'm using to practice what I learn.</p>
-
-        <div class="projects-grid">
-
-          <article class="card project-card">
-            <h3>Personal Portfolio</h3>
-            <p>
-              A responsive personal portfolio built to practice semantic HTML, CSS layouts,
-              responsive design and basic JavaScript.
-            </p>
-            <p class="technologies">HTML &bull; CSS &bull; JavaScript</p>
-            <div class="button-group">
-              <a href="#" class="button button-primary button-small">Live Demo</a>
-              <a href="#" class="button button-outline button-small">GitHub</a>
-            </div>
-          </article>
-
-          <article class="card project-card">
-            <h3>Responsive Landing Page</h3>
-            <p>
-              A responsive landing page created to practice Flexbox, CSS Grid, spacing,
-              typography and mobile layouts.
-            </p>
-            <p class="technologies">HTML &bull; CSS</p>
-            <div class="button-group">
-              <a href="#" class="button button-primary button-small">Live Demo</a>
-              <a href="#" class="button button-outline button-small">GitHub</a>
-            </div>
-          </article>
-
-          <article class="card project-card">
-            <h3>Programming Practice</h3>
-            <p>
-              A collection of small programming exercises and experiments created while
-              learning Python, Java and C++.
-            </p>
-            <p class="technologies">Python &bull; Java &bull; C++</p>
-            <div class="button-group">
-              <a href="#" class="button button-primary button-small">Live Demo</a>
-              <a href="#" class="button button-outline button-small">GitHub</a>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== EDUCATION ========== -->
-    <section class="section section-alt" id="education">
-      <div class="container">
-        <h2>Education</h2>
-
+  <section class="section" id="education">
+    <div class="container">
+      <h2>Education &amp; journey</h2>
+      <p class="section-intro">Where I study and the path I'm following.</p>
+      <div class="edu-grid">
         <div class="card education-card">
           <h3>Scaler School of Technology</h3>
           <p class="education-field">Computer Science &amp; AI</p>
           <p class="education-meta">2026 &mdash; Present</p>
           <p class="education-meta">Bengaluru, India</p>
         </div>
-      </div>
-    </section>
-
-    <!-- ========== LEARNING JOURNEY ========== -->
-    <section class="section" id="journey">
-      <div class="container">
-        <h2>Learning Journey</h2>
-
         <ol class="timeline">
-          <li class="timeline-item">Started with programming fundamentals</li>
-          <li class="timeline-item">Learning Java, Python and C++</li>
-          <li class="timeline-item">Exploring Web Development</li>
-          <li class="timeline-item">Learning Data Structures &amp; Algorithms</li>
-          <li class="timeline-item">Exploring AI/ML</li>
+          <li class="timeline-item">Got curious about code through the technology behind cricket's DRS</li>
+          <li class="timeline-item">Began Computer Science &amp; AI at Scaler School of Technology</li>
+          <li class="timeline-item">Learning Java, HTML and CSS</li>
+          <li class="timeline-item">Built my first portfolio website</li>
+          <li class="timeline-item">Learning Data Structures &amp; Algorithms and AI/ML. Building a Java project and starting competitive programming</li>
         </ol>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ========== CONTACT ========== -->
-    <section class="section section-alt" id="contact">
-      <div class="container">
-        <h2>Let's build something.</h2>
-
-        <div class="contact-grid">
-
-          <div class="contact-info">
-            <p class="contact-label">Email</p>
-            <p class="contact-value">abhinav.26bcs10818@sst.scaler.com</p>
-
-            <p class="contact-label">Phone</p>
-            <p class="contact-value">0000000000</p>
-
-            <div class="button-group">
-              <a href="mailto:abhinav.26bcs10818@sst.scaler.com" class="button button-primary">Send Email</a>
-              <a href="tel:0000000000" class="button button-outline">Call Me</a>
-            </div>
-          </div>
-
-          <form class="card contact-form" id="contact-form" novalidate>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name">
-
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="you@example.com">
-
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Write your message here"></textarea>
-
-            <button type="submit" class="button button-primary">Send Message</button>
-
-            <p class="form-message" id="form-message" role="status"></p>
-          </form>
-
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <div class="contact-box">
+        <h2>Let's connect.</h2>
+        <p>I'm here to learn. I'd love to hear from students, developers and mentors who enjoy talking about code.</p>
+        <p class="contact-value" id="email-text">abhinavkumar.dev@gmail.com</p>
+        <div class="button-group">
+          <a href="mailto:abhinavkumar.dev@gmail.com" class="button button-primary">Send email</a>
+          <button type="button" class="button button-outline" id="copy-email">Copy email</button>
+          <a href="https://www.linkedin.com/in/abhinav-kumar-bb796a280" class="button button-outline">LinkedIn</a>
+          <a href="https://github.com/Abhinav82676" class="button button-outline">GitHub</a>
         </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div>
-        <p>&copy; 2026 Abhinav Kumar</p>
-        <p class="footer-small">Built with HTML, CSS &amp; JavaScript.</p>
-      </div>
-      <div class="footer-links">
-        <a href="#">GitHub</a>
-        <a href="mailto:abhinav.26bcs10818@sst.scaler.com">Email</a>
+        <span class="copied" id="copied" role="status"></span>
       </div>
     </div>
-  </footer>
+  </section>
+</main>
 
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top">&uarr;</button>
+<footer class="footer">
+  <div class="container footer-inner">
+    <p>&copy; 2026 Abhinav Kumar &middot; Abhinav ka Anubhav</p>
+    <div class="footer-links">
+      <a href="https://github.com/Abhinav82676">GitHub</a>
+      <a href="https://www.linkedin.com/in/abhinav-kumar-bb796a280">LinkedIn</a>
+      <a href="mailto:abhinavkumar.dev@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">&uarr;</button>
 
-  <script src="script.js"></script>
+<script>
+(function(){
+  var btn=document.getElementById('menu-button'), nav=document.getElementById('nav-links');
+  btn.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+  });
+  nav.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+  });
+
+  var top=document.getElementById('back-to-top');
+  var links=[].slice.call(nav.querySelectorAll('a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function onScroll(){
+    top.classList.toggle('show',window.scrollY>600);
+    var y=window.scrollY+120, cur=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i;});
+    links.forEach(function(a,i){a.classList.toggle('active',i===cur);});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+  var copy=document.getElementById('copy-email'), msg=document.getElementById('copied');
+  copy.addEventListener('click',function(){
+    var t=document.getElementById('email-text').textContent;
+    function ok(){msg.textContent='Email copied';setTimeout(function(){msg.textContent='';},2000);}
+    if(navigator.clipboard){navigator.clipboard.writeText(t).then(ok,function(){msg.textContent='Copy failed. Select the email and copy it.';});}
+    else{msg.textContent='Copy not supported. Select the email and copy it.';}
+  });
+  var tt=document.getElementById('theme-toggle'), meta=document.querySelector('meta[name="theme-color"]');
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme',t);
+    tt.textContent=t==='dark'?'\u2600':'\u263E';
+    tt.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');
+    if(meta)meta.setAttribute('content',t==='dark'?'#13161C':'#FFFFFF');
+  }
+  applyTheme(document.documentElement.getAttribute('data-theme')||'dark');
+  tt.addEventListener('click',function(){
+    var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    applyTheme(t);
+    try{localStorage.setItem('theme',t);}catch(e){}
+  });
+})();
+</script>
 </body>
 </html>
