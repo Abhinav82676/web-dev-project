@@ -1,0 +1,1141 @@
+/* ==========================================================
+   ABHINAV KUMAR | PORTFOLIO
+   style.css  (matches the index.html class names exactly)
+
+   Contents
+   1. Design tokens (light + dark)
+   2. Reset and base
+   3. Layout helpers
+   4. Navbar
+   5. Buttons
+   6. Hero
+   7. Cards, pills and lists
+   8. About
+   9. Skills
+   10. Projects
+   11. Education and timeline
+   12. Contact
+   13. Footer and back-to-top
+   14. Motion and accessibility
+   ========================================================== */
+
+
+/* ==========================================================
+   1. DESIGN TOKENS
+   Change a colour here and it changes everywhere.
+   ========================================================== */
+:root {
+  /* Brand colours (the four "Google" dots) */
+  --blue: #1a73e8;
+  --blue-d: #1765cc;
+  --blue-bg: #e8f0fe;
+  --red: #ea4335;
+  --yellow: #fbbc04;
+  --green: #34a853;
+
+  /* Surfaces and text */
+  --text: #202124;
+  --mute: #5f6368;
+  --line: #dadce0;
+  --surface: #f8f9fa;
+  --white: #ffffff;
+  --card: #ffffff;
+  --nav: rgba(255, 255, 255, 0.85);
+  --on-blue: #ffffff;
+
+  /* Badge */
+  --badge-bg: #fef7e0;
+  --badge-c: #b06000;
+
+  /* Soft coloured glows used in the hero and contact box */
+  --glow-blue: rgba(26, 115, 232, 0.18);
+  --glow-red: rgba(234, 67, 53, 0.12);
+  --glow-yellow: rgba(251, 188, 4, 0.16);
+  --glow-green: rgba(52, 168, 83, 0.14);
+
+  /* Elevation */
+  --shadow-1: 0 1px 2px rgba(60, 64, 67, 0.12), 0 1px 3px rgba(60, 64, 67, 0.08);
+  --shadow-2: 0 2px 6px rgba(60, 64, 67, 0.12), 0 8px 24px rgba(60, 64, 67, 0.1);
+  --shadow-3: 0 4px 12px rgba(60, 64, 67, 0.14), 0 20px 48px rgba(60, 64, 67, 0.16);
+
+  /* Radius scale: small controls, cards, big panels */
+  --r-sm: 10px;
+  --r-md: 18px;
+  --r-lg: 28px;
+
+  /* Type */
+  --font: "Google Sans Flex", "Google Sans", "Product Sans", Roboto, "Segoe UI", system-ui, sans-serif;
+  --mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Dark theme: the toggle sets data-theme="dark" on <html> */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --blue: #8ab4f8;
+  --blue-d: #aecbfa;
+  --blue-bg: #1c2a44;
+  --red: #f28b82;
+  --yellow: #fdd663;
+  --green: #81c995;
+  --text: #e8eaed;
+  --mute: #9aa0a6;
+  --line: #3c4043;
+  --surface: #1b1e26;
+  --white: #13161c;
+  --card: #1f232c;
+  --nav: rgba(19, 22, 28, 0.82);
+  --on-blue: #13161c;
+  --badge-bg: #3b3217;
+  --badge-c: #fdd663;
+
+  --glow-blue: rgba(138, 180, 248, 0.16);
+  --glow-red: rgba(242, 139, 130, 0.1);
+  --glow-yellow: rgba(253, 214, 99, 0.1);
+  --glow-green: rgba(129, 201, 149, 0.1);
+
+  --shadow-1: none;
+  --shadow-2: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --shadow-3: 0 8px 28px rgba(0, 0, 0, 0.55);
+}
+
+
+/* ==========================================================
+   2. RESET AND BASE
+   ========================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;      /* sticky navbar never covers a section title */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--text);
+  font: 400 1rem/1.7 var(--font);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a {
+  color: var(--blue);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 3.6vw, 2.5rem);
+  margin-bottom: 10px;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--blue);
+  color: var(--on-blue);
+}
+
+/* Visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+/* Slim scrollbar that follows the theme */
+html {
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+
+
+/* ==========================================================
+   3. LAYOUT HELPERS
+   ========================================================== */
+.container {
+  width: min(1100px, 100% - 48px);
+  margin: 0 auto;
+}
+
+.section {
+  padding: 96px 0;
+}
+
+.section-alt {
+  background: var(--surface);
+}
+
+.section-intro {
+  color: var(--mute);
+  font-size: 1.1rem;
+  margin: 0 0 44px;
+  max-width: 60ch;
+}
+
+
+/* ==========================================================
+   4. NAVBAR  (sticky, frosted glass)
+   ========================================================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--nav);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--line);
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Four coloured dots next to the name */
+.dots {
+  display: flex;
+  gap: 4px;
+}
+
+.dots i {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  transition: transform 0.35s var(--ease);
+}
+
+.dots i:nth-child(1) { background: var(--blue); }
+.dots i:nth-child(2) { background: var(--red); }
+.dots i:nth-child(3) { background: var(--yellow); }
+.dots i:nth-child(4) { background: var(--green); }
+
+/* Dots bounce one after another when you hover the logo */
+.logo:hover .dots i:nth-child(1) { transform: translateY(-4px); }
+.logo:hover .dots i:nth-child(2) { transform: translateY(-4px); transition-delay: 0.05s; }
+.logo:hover .dots i:nth-child(3) { transform: translateY(-4px); transition-delay: 0.1s; }
+.logo:hover .dots i:nth-child(4) { transform: translateY(-4px); transition-delay: 0.15s; }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  display: block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--mute);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-links a:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* The "active" class is added by JavaScript while you scroll */
+.nav-links a.active {
+  background: var(--blue-bg);
+  color: var(--blue-d);
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.4s var(--ease), border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background: var(--surface);
+  border-color: var(--blue);
+  transform: rotate(20deg);
+}
+
+/* Hidden on desktop, shown on mobile */
+.menu-button {
+  display: none;
+  background: none;
+  border: 0;
+  font-size: 1.5rem;
+  color: var(--text);
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: var(--r-sm);
+}
+
+@media (max-width: 800px) {
+  .menu-button {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 68px;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 24px 18px;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-2);
+  }
+
+  .nav-links.open {
+    display: flex;
+    animation: menu-drop 0.25s var(--ease);
+  }
+
+  .nav-links a {
+    padding: 12px 16px;
+  }
+}
+
+@keyframes menu-drop {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ==========================================================
+   5. BUTTONS
+   ========================================================== */
+.button-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: 500 0.95rem var(--font);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s var(--ease), border-color 0.2s;
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.button-primary {
+  background: var(--blue);
+  color: var(--on-blue);
+  box-shadow: 0 1px 2px rgba(26, 115, 232, 0.35);
+}
+
+.button-primary:hover {
+  background: var(--blue-d);
+  box-shadow: 0 6px 18px rgba(26, 115, 232, 0.35);
+  transform: translateY(-1px);
+}
+
+.button-outline {
+  background: var(--card);
+  color: var(--blue);
+  border-color: var(--line);
+}
+
+.button-outline:hover {
+  background: var(--blue-bg);
+  border-color: var(--blue);
+}
+
+.button-small {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+}
+
+
+/* ==========================================================
+   6. HERO  (the one memorable moment)
+   ========================================================== */
+.hero {
+  position: relative;
+  padding: 88px 0 104px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Soft four-colour glow behind the hero, drawn with gradients only */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 120%;
+  z-index: -1;
+  background:
+    radial-gradient(40% 45% at 15% 20%, var(--glow-blue), transparent 70%),
+    radial-gradient(35% 40% at 85% 15%, var(--glow-red), transparent 70%),
+    radial-gradient(35% 40% at 75% 80%, var(--glow-yellow), transparent 70%),
+    radial-gradient(40% 45% at 25% 85%, var(--glow-green), transparent 70%);
+  filter: blur(20px);
+  animation: glow-drift 18s ease-in-out infinite alternate;
+}
+
+/* Faint dotted grid that fades out toward the bottom */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(var(--line) 1px, transparent 1.5px);
+  background-size: 28px 28px;
+  opacity: 0.55;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+}
+
+@keyframes glow-drift {
+  from { transform: translate3d(-2%, 0, 0) scale(1); }
+  to   { transform: translate3d(2%, 3%, 0) scale(1.08); }
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.hero-hello {
+  display: inline-block;
+  margin-bottom: 24px;
+  padding: 7px 18px;
+  background: var(--blue-bg);
+  color: var(--blue-d);
+  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.7rem, 7.2vw, 4.8rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  /* Text fades from the main colour into the brand blue */
+  background: linear-gradient(100deg, var(--text) 35%, var(--blue) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.hero-subtitle {
+  margin: 22px 0 16px;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  color: var(--mute);
+}
+
+.hero-description {
+  max-width: 52ch;
+  margin: 0 0 34px;
+  color: var(--mute);
+  font-size: 1.1rem;
+}
+
+/* "At a glance" card */
+.glance {
+  position: relative;
+  padding: 32px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-3);
+  transition: transform 0.4s var(--ease);
+}
+
+.glance:hover {
+  transform: translateY(-4px) rotate(-0.4deg);
+}
+
+.glance h3 {
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+}
+
+.glance .sub {
+  margin: 0 0 22px;
+  color: var(--mute);
+  font-size: 0.95rem;
+}
+
+.glance dl {
+  margin: 0;
+}
+
+.glance dt {
+  margin-top: 16px;
+  color: var(--mute);
+  font-size: 0.85rem;
+}
+
+.glance dd {
+  margin: 2px 0 0;
+  font-weight: 500;
+}
+
+/* Four-colour strip at the top of the card */
+.bar {
+  display: flex;
+  height: 6px;
+  margin-bottom: 22px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bar i {
+  flex: 1;
+}
+
+.bar i:nth-child(1) { background: var(--blue); }
+.bar i:nth-child(2) { background: var(--red); }
+.bar i:nth-child(3) { background: var(--yellow); }
+.bar i:nth-child(4) { background: var(--green); }
+
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .hero {
+    padding: 64px 0 72px;
+  }
+
+  .section {
+    padding: 68px 0;
+  }
+}
+
+
+/* ==========================================================
+   7. CARDS, PILLS AND LISTS  (shared)
+   ========================================================== */
+.card {
+  padding: 28px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-1);
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 14px;
+}
+
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pill-list li {
+  padding: 5px 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s var(--ease);
+}
+
+.pill-list li:hover {
+  background: var(--blue-bg);
+  border-color: var(--blue);
+  color: var(--blue-d);
+  transform: translateY(-2px);
+}
+
+
+/* ==========================================================
+   8. ABOUT
+   ========================================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.about-text p {
+  max-width: 62ch;
+  margin: 0 0 16px;
+  color: var(--mute);
+  font-size: 1.05rem;
+}
+
+.small-heading {
+  margin: 30px 0 14px;
+  font-size: 1.05rem;
+}
+
+/* "Currently focused on" list, each dot a different brand colour */
+.focus-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.focus-list li {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.focus-list li:last-child {
+  border-bottom: 0;
+}
+
+.focus-list li::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent);
+}
+
+.focus-list li:nth-child(2)::before { background: var(--red);    box-shadow: 0 0 0 4px color-mix(in srgb, var(--red) 18%, transparent); }
+.focus-list li:nth-child(3)::before { background: var(--yellow); box-shadow: 0 0 0 4px color-mix(in srgb, var(--yellow) 22%, transparent); }
+.focus-list li:nth-child(4)::before { background: var(--green);  box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 18%, transparent); }
+
+@media (max-width: 800px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ==========================================================
+   9. SKILLS
+   ========================================================== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.skills-card {
+  position: relative;
+  border-top: 0;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s;
+}
+
+/* Coloured top edge (one colour per card) */
+.skills-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--blue);
+}
+
+.skills-grid .skills-card:nth-child(2)::before { background: var(--red); }
+.skills-grid .skills-card:nth-child(3)::before { background: var(--yellow); }
+.skills-grid .skills-card:nth-child(4)::before { background: var(--green); }
+
+.skills-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-2);
+}
+
+/* Things I'm still learning get a dashed outline */
+.skills-card.learning .pill-list li {
+  border-style: dashed;
+  color: var(--mute);
+}
+
+.skills-card.learning .pill-list li:hover {
+  color: var(--blue-d);
+}
+
+
+/* ==========================================================
+   10. PROJECTS
+   ========================================================== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s var(--ease), border-color 0.3s;
+}
+
+/* Colour bar that slides in along the top on hover */
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blue), var(--red), var(--yellow), var(--green));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--blue) 40%, var(--line));
+  box-shadow: var(--shadow-3);
+}
+
+.project-card:hover::before {
+  transform: scaleX(1);
+}
+
+.project-card p {
+  margin: 0;
+  color: var(--mute);
+}
+
+.project-card .button-group {
+  margin-top: auto;      /* pushes the buttons to the bottom of the card */
+  padding-top: 12px;
+}
+
+.technologies {
+  font: 500 0.85rem var(--mono);
+  color: var(--blue) !important;
+}
+
+/* "In progress" card */
+.soon {
+  background: var(--surface);
+  border-style: dashed;
+}
+
+.soon:hover {
+  box-shadow: none;
+  transform: none;
+  border-color: var(--line);
+}
+
+.soon:hover::before {
+  transform: scaleX(0);
+}
+
+.badge {
+  align-self: flex-start;
+  padding: 3px 12px;
+  background: var(--badge-bg);
+  color: var(--badge-c);
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+
+/* ==========================================================
+   11. EDUCATION AND TIMELINE
+   ========================================================== */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.education-field {
+  margin: 0 0 6px;
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.education-meta {
+  margin: 0;
+  color: var(--mute);
+}
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 28px;
+  border-left: 2px solid var(--line);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 26px 18px;
+  color: var(--mute);
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Hollow dot on the line */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -37px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  background: var(--white);
+  border: 3px solid var(--blue);
+  border-radius: 50%;
+  transition: transform 0.25s var(--ease), background 0.25s;
+}
+
+.timeline-item:hover::before {
+  transform: scale(1.35);
+  background: var(--blue);
+}
+
+.timeline-item:nth-child(2)::before { border-color: var(--red); }
+.timeline-item:nth-child(3)::before { border-color: var(--yellow); }
+.timeline-item:nth-child(4)::before { border-color: var(--green); }
+.timeline-item:nth-child(5)::before { border-color: var(--blue); }
+
+.timeline-item:nth-child(2):hover::before { background: var(--red); }
+.timeline-item:nth-child(3):hover::before { background: var(--yellow); }
+.timeline-item:nth-child(4):hover::before { background: var(--green); }
+
+@media (max-width: 800px) {
+  .edu-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ==========================================================
+   12. CONTACT
+   ========================================================== */
+.contact-box {
+  position: relative;
+  padding: clamp(36px, 6vw, 68px);
+  text-align: center;
+  background: var(--blue-bg);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Two soft coloured blobs in opposite corners */
+.contact-box::before,
+.contact-box::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.7;
+}
+
+.contact-box::before {
+  top: -140px;
+  left: -100px;
+  background: var(--glow-yellow);
+}
+
+.contact-box::after {
+  bottom: -140px;
+  right: -100px;
+  background: var(--glow-green);
+}
+
+.contact-box h2 {
+  margin-bottom: 14px;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  letter-spacing: -0.03em;
+}
+
+.contact-box p {
+  max-width: 50ch;
+  margin: 0 auto 24px;
+  color: var(--mute);
+  font-size: 1.1rem;
+}
+
+/* The email address, shown like a code chip */
+.contact-box p.contact-value,
+.contact-value {
+  display: inline-block;
+  margin-bottom: 28px !important;
+  padding: 8px 20px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font: 500 1.05rem var(--mono);
+  color: var(--text) !important;
+  word-break: break-word;
+}
+
+.contact-box .button-group {
+  justify-content: center;
+}
+
+.contact-box .button-outline {
+  border-color: transparent;
+  background: var(--card);
+}
+
+.contact-box .button-outline:hover {
+  border-color: var(--blue);
+  background: var(--card);
+}
+
+.copied {
+  display: block;
+  min-height: 1.6em;
+  margin-top: 16px;
+  color: var(--green);
+  font-weight: 500;
+}
+
+
+/* ==========================================================
+   13. FOOTER AND BACK-TO-TOP
+   ========================================================== */
+.footer {
+  padding: 32px 0 calc(32px + env(safe-area-inset-bottom, 0));
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer p {
+  margin: 0;
+  color: var(--mute);
+  font-size: 0.95rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  position: relative;
+  color: var(--mute);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+/* Underline grows from the left on hover */
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease);
+}
+
+.footer-links a:hover {
+  color: var(--blue);
+}
+
+.footer-links a:hover::after {
+  transform: scaleX(1);
+}
+
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0));
+  z-index: 40;
+  width: 48px;
+  height: 48px;
+  background: var(--blue);
+  color: var(--on-blue);
+  border: 0;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(26, 115, 232, 0.4);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s var(--ease), background 0.2s;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  background: var(--blue-d);
+}
+
+
+/* ==========================================================
+   14. MOTION AND ACCESSIBILITY
+   ========================================================== */
+
+/* One orchestrated entrance: the hero content arrives in sequence on load */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-hello,
+  .hero h1,
+  .hero-subtitle,
+  .hero-description,
+  .hero .button-group,
+  .glance {
+    animation: rise 0.8s var(--ease) both;
+  }
+
+  .hero-hello       { animation-delay: 0.05s; }
+  .hero h1          { animation-delay: 0.15s; }
+  .hero-subtitle    { animation-delay: 0.25s; }
+  .hero-description { animation-delay: 0.35s; }
+  .hero .button-group { animation-delay: 0.45s; }
+  .glance           { animation-delay: 0.4s; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Respect people who ask their system for less motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Tidy small phones */
+@media (max-width: 480px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+
+  .card {
+    padding: 22px;
+  }
+
+  .glance {
+    padding: 24px;
+  }
+
+  .button-group .button {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Print: plain, ink-friendly */
+@media print {
+  .navbar,
+  .back-to-top,
+  .theme-toggle,
+  .hero::before,
+  .hero::after {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
